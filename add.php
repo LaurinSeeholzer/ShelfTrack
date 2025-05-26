@@ -8,19 +8,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = $_POST['description'];
     $defects = $_POST['defects'];
 
-    // Image upload
-    $image = $_FILES['image'];
-    $image_path = '';
-    if ($image['tmp_name']) {
-        $target_dir = "upload/";
-        $image_path = $target_dir . basename($image["name"]);
-        move_uploaded_file($image["tmp_name"], $image_path);
-    }
-
-    $stmt = $conn->prepare("INSERT INTO objects (shelf, quantity, object_number, image_path, name, description, defects) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sisssss", $shelf, $quantity, $object_number, $image_path, $name, $description, $defects);
+    $stmt = $conn->prepare("INSERT INTO objects (shelf, quantity, object_number, name, description, defects) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sissss", $shelf, $quantity, $object_number, $name, $description, $defects);
     $stmt->execute();
+
+    $last_id = $stmt->insert_id;
     $stmt->close();
+
+    // Handle image upload
+    if (!empty($_FILES['image']['tmp_name'])) {
+        $upload_path = __DIR__ . "/upload/" . $last_id . ".jpg";
+        move_uploaded_file($_FILES['image']['tmp_name'], $upload_path);
+    }
+    
     header("Location: index.php");
     exit;
 }
