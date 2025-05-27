@@ -1,34 +1,80 @@
-<?php include 'db.php'?>
+<?php
+    require_once 'db.php';
 
-<h2>Inventory List</h2>
-<a href="add.php">Add New Object</a>
-<table>
-    <tr>
-        <th>Image</th>
-        <th>Shelf</th>
-        <th>Quantity</th>
-        <th>Object Number</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Defects</th>
-        <th>Actions</th>
-    </tr>
-    <?php
-    $result = $conn->query("SELECT * FROM objects");
-    while ($row = $result->fetch_assoc()):
-    ?>
-    <tr>
-        <td><img src="upload/<?= $row['id'] ?>.jpg" alt="Image" height="60"></td>
-        <td><?= htmlspecialchars($row['shelf']) ?></td>
-        <td><?= $row['quantity'] ?></td>
-        <td><?= htmlspecialchars($row['object_number']) ?></td>
-        <td><?= htmlspecialchars($row['name']) ?></td>
-        <td><?= nl2br(htmlspecialchars($row['description'])) ?></td>
-        <td><?= nl2br(htmlspecialchars($row['defects'])) ?></td>
-        <td>
-            <a href="edit.php?id=<?= $row['id'] ?>">Edit</a> |
-            <a href="delete.php?id=<?= $row['id'] ?>" onclick="return confirm('Delete this item?')">Delete</a>
-        </td>
-    </tr>
+
+    $racksql = "SELECT racks.id, racks.name FROM racks
+            ORDER BY racks.name ASC";
+
+    $shelfsql = "SELECT shelves.id, shelves.number, racks.name AS rack_name
+            FROM shelves
+            LEFT JOIN racks ON shelves.rack_id = racks.id
+            ORDER BY racks.name ASC, shelves.number + 0 ASC";
+
+    $objectsql = "SELECT objects.id, objects.quantity, objects.object_number, objects.name, objects.description, objects.defects, shelves.number AS shelf_number, racks.name AS rack_name
+            FROM objects
+            LEFT JOIN shelves ON objects.shelf_id = shelves.id
+            LEFT JOIN racks ON shelves.rack_id = racks.id
+            ORDER BY objects.object_number ASC";
+    
+    $rackresult = $conn->query($racksql);
+    $shelfresult = $conn->query($shelfsql);
+    $objectresult = $conn->query($objectsql);
+?>
+    
+<h1>Inventory</h1>
+
+<h2>Racks</h2>
+<a href="rack_add.php">Add New Rack</a>
+<ul>
+    <?php while ($rack = $rackresult->fetch_assoc()): ?>
+        <li>
+            <strong>Name:</strong> <?= htmlspecialchars($rack['name']) ?><br>
+
+            <div class="buttons">
+                <a href="rack_edit.php?id=<?= $rack['id'] ?>">Edit</a>
+                <a href="rack_delete.php?id=<?= $rack['id'] ?>" onclick="return confirm('Delete this object?');">Delete</a>
+            </div>
+        </li>
     <?php endwhile; ?>
-</table>
+</ul>
+
+<h2>Shelves</h2>
+<a href="shelf_add.php">Add New Shelf</a>
+<ul>
+    <?php while ($shelf = $shelfresult->fetch_assoc()): ?>
+        <li>
+            <strong>Number:</strong><?=htmlspecialchars($shelf['rack_name'])?>.<?= htmlspecialchars($shelf['number']) ?><br>
+
+            <div class="buttons">
+                <a href="shelf_edit.php?id=<?= $shelf['id'] ?>">Edit</a>
+                <a href="shelf_delete.php?id=<?= $shelf['id'] ?>" onclick="return confirm('Delete this object?');">Delete</a>
+            </div>
+        </li>
+    <?php endwhile; ?>
+</ul>
+
+<h2>Objects</h2>
+<a href="add.php">Add New Object</a>
+<ul>
+    <?php while ($object = $objectresult->fetch_assoc()): ?>
+        <li>
+            <strong>Name:</strong> <?= htmlspecialchars($object['name']) ?><br>
+            <strong>Object Number:</strong> <?= htmlspecialchars($object['object_number']) ?><br>
+            <strong>Quantity:</strong> <?= $object['quantity'] ?><br>
+            <strong>Shelf:</strong><?= htmlspecialchars($object['rack_name'])?>.<?= htmlspecialchars($object['shelf_number'])?><br>
+            <strong>Description:</strong> <?= nl2br(htmlspecialchars($object['description'])) ?><br>
+            <strong>Defects:</strong> <?= nl2br(htmlspecialchars($object['defects'])) ?><br>
+
+            <?php
+                $image_path = "upload/" . $object['id'] . ".jpg";
+                if (file_exists($image_path)): ?>
+                    <img src="<?= $image_path ?>" alt="Image" style="max-height: 100px;">
+            <?php endif; ?>
+
+            <div class="buttons">
+                <a href="edit.php?id=<?= $object['id'] ?>">Edit</a>
+                <a href="delete.php?id=<?= $object['id'] ?>" onclick="return confirm('Delete this object?');">Delete</a>
+            </div>
+        </li>
+    <?php endwhile; ?>
+</ul>
