@@ -1,6 +1,4 @@
-<?php
-    require_once 'db.php';
-
+<?php require_once 'db.php';
 
     $racksql = "SELECT racks.id, racks.name FROM racks
             ORDER BY racks.name ASC";
