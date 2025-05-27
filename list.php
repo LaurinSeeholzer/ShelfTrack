@@ -54,7 +54,7 @@
 </ul>
 
 <h2>Objects</h2>
-<a href="add.php">Add New Object</a>
+<a href="object_add.php">Add New Object</a>
 <ul>
     <?php while ($object = $objectresult->fetch_assoc()): ?>
         <li>
@@ -72,8 +72,8 @@
             <?php endif; ?>
 
             <div class="buttons">
-                <a href="edit.php?id=<?= $object['id'] ?>">Edit</a>
-                <a href="delete.php?id=<?= $object['id'] ?>" onclick="return confirm('Delete this object?');">Delete</a>
+                <a href="object_edit.php?id=<?= $object['id'] ?>">Edit</a>
+                <a href="object_delete.php?id=<?= $object['id'] ?>" onclick="return confirm('Delete this object?');">Delete</a>
             </div>
         </li>
     <?php endwhile; ?>

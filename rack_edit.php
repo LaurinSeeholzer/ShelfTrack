@@ -6,15 +6,26 @@
 
         $name = $_POST['name'];
 
-        $stmt = $conn->prepare("UPDATE racks SET name = ? WHERE id = ?");
-        $stmt->bind_param("si", $name, $id);
-        $stmt->execute();
-        $stmt->close();
+        $check = $conn->prepare("SELECT id FROM racks WHERE name = ? AND id != ?");
+        $check->bind_param("si", $name, $id);
+        $check->execute();
+        $check->store_result();
 
-        header("Location: index.php");
-        exit;
-    } 
+        if ($check->num_rows > 0) {
+            $error = "This rack already exists";
+        } else {
+            // Safe to insert
+            $stmt = $conn->prepare("UPDATE racks SET name = ? WHERE id = ?");
+            $stmt->bind_param("si", $name, $id);
+            $stmt->execute();
+            header("Location: index.php");
+            exit;
+        }
 
+        $check->close();
+
+    }
+        
     $stmt = $conn->prepare("SELECT * FROM racks WHERE id=?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -39,3 +50,7 @@
     </form>
 </body>
 </html>
+
+<?php if (isset($error)): ?>
+    <p style="color: red;"><?= htmlspecialchars($error) ?></p>
+<?php endif; ?>
