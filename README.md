@@ -92,6 +92,8 @@ You can also upload an image for each object. Uploaded images are stored under `
 - Deleting a rack deletes all its shelves and objects.
 
 ## Screenshots
+![Screenshot index.php](https://github.com/user-attachments/assets/140bab6c-18ec-44be-b2bb-822081a2ed52)
+![Screenshot object_edit.php](https://github.com/user-attachments/assets/5811cfef-b397-436e-ae7f-1c432be90a91)
 
 ## Feedback
 Got feedback or suggestions?
