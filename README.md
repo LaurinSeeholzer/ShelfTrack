@@ -100,4 +100,5 @@ Reach out via [laurinseeholzer.ch](https://laurinseeholzer.ch)
 
 ## Screenshots
 ![Screenshot index.php](https://github.com/user-attachments/assets/140bab6c-18ec-44be-b2bb-822081a2ed52)
-![Screenshot object_edit.php](https://github.com/user-attachments/assets/5811cfef-b397-436e-ae7f-1c432be90a91)
+![Screenshot object_edit.php](https://github.com/user-attachments/assets/44f38223-32b6-4bd0-bc93-aa203491e352)
+
