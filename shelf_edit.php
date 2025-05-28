@@ -89,7 +89,7 @@
             <div class="flex h-16 items-center justify-between px-4 sm:px-0">
                 <div class="flex items-center">
                 <div class="shrink-0">
-                    <img class="size-8" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=gray&shade=100" alt="Your Company">
+                    <h1 class="font-normal text-white text-4xl">T<strong class="font-extrabold">Rack</strong></h1>
                 </div>
                 </div>
             </div>
