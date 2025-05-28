@@ -2,17 +2,6 @@
 
 **TRack** is a lightweight inventory management system built in PHP. It helps organize objects stored on **shelves**, which in turn belong to **racks** — reflecting the structure of real-world storage systems.
 
----
-
-## Features
-
-- Hierarchical structure: Racks → Shelves → Objects
-- Image upload support for objects
-- Automatic database setup on first run
-- Clean and simple PHP implementation
-
----
-
 ## Installation
 
 Clone the GitHub repository using Git or download it manually:
@@ -102,11 +91,11 @@ You can also upload an image for each object. Uploaded images are stored under `
 - Deleting a shelf deletes all its objects.
 - Deleting a rack deletes all its shelves and objects.
 
-##Screenshots
+## Screenshots
 
-##Feedback
+## Feedback
 Got feedback or suggestions?
 Reach out via [laurinseeholzer.ch](https://laurinseeholzer.ch)
 
-##License
+## License
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
