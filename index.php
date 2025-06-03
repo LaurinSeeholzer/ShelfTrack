@@ -50,6 +50,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>  
+    <script src="/js/datamatrix.min.js"></script> 
 
 </head>
 
@@ -168,10 +169,12 @@
                 <div class="grid grid-cols-1 gap-y-4">
                     <?php foreach($objects as $object): ?>
                       <div class="relative w-full border border-gray-200 rounded-md sm:h-40">
+                        <?php if ($object['defects'] != ''): ?><span class="absolute top-2 z-10 left-32 inline-flex items-center rounded-full bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">!</span><?php endif; ?>
                         <span class="absolute top-2 z-10 left-2 inline-flex items-center rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600"><?= htmlspecialchars($object['quantity'])?></span>
                         <div class="flex w-full">
-                          <img src="upload/<?= $object['id']?>.jpg" class="flex-none rounded-md overflow-hidden h-32 m-4 aspect-square cover border border-gray-200">
-                          <div class="grow grid sm:grid-cols-2 p-4 h-40 w-full">
+                          <img src="upload/<?= $object['id']?>.jpg" class="flex-none rounded-md overflow-hidden h-32 m-4 aspect-square cover border <?php if ($object['defects'] != ''): ?>border-red-600/10<?php endif; ?><?php if ($object['defects'] == ''): ?>border-gray-200<?php endif; ?>">
+                          <div data-matrix="<?= htmlspecialchars($object['object_number']) ?>" class="datamatrix flex-none rounded-md overflow-hidden h-32 my-4 aspect-square cover border border-gray-200"></div>
+                          <div class="grow p-4">
                             <div class="hidden sm:block">
                               <h5 class="font-semibold text-gray-500 h-6">
                                 <?= htmlspecialchars($object['object_number'])?>
@@ -183,13 +186,6 @@
                                 <?= htmlspecialchars($object['description'])?>
                               </p>
                             </div>
-                            <?php if ($object['defects'] != ''): ?>
-                              <div class="h-32 overflow-hidden ml-4 bg-red-100 p-2 grid grid-cols-1 gap-y-2 rounded-md border border-red-200">
-                                <p class="text-red-900">
-                                  <?= htmlspecialchars($object['defects']) ?>
-                                </p>
-                              </div>
-                            <?php endif; ?>
                           </div>
                           <div class="grid grid-rows-2 flex-none divide-y divide-gray-200 border-l border-gray-200 rounded-r-md h-40">
                             <a href="/object_edit.php?id=<?= htmlspecialchars($object['id'])?>" class="h-full w-12 px-3 relative">
@@ -244,6 +240,8 @@
     </div>
   </main>
 </div>
+
+<script src="/js/dataMatrix.js" defer></script> 
 
 </body>
 
