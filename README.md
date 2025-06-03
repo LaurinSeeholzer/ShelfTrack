@@ -91,11 +91,14 @@ You can also upload an image for each object. Uploaded images are stored under `
 - Deleting a shelf deletes all its objects.
 - Deleting a rack deletes all its shelves and objects.
 
-## Screenshots
-
 ## Feedback
 Got feedback or suggestions?
 Reach out via [laurinseeholzer.ch](https://laurinseeholzer.ch)
 
 ## License
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
+## Screenshots
+![Screenshot index.php](https://github.com/user-attachments/assets/140bab6c-18ec-44be-b2bb-822081a2ed52)
+![Screenshot object_edit.php](https://github.com/user-attachments/assets/44f38223-32b6-4bd0-bc93-aa203491e352)
+
