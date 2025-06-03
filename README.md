@@ -98,7 +98,7 @@ Reach out via [laurinseeholzer.ch](https://laurinseeholzer.ch)
 ## License
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-## Screenshots
-![Screenshot index.php](https://github.com/user-attachments/assets/140bab6c-18ec-44be-b2bb-822081a2ed52)
-![Screenshot object_edit.php](https://github.com/user-attachments/assets/44f38223-32b6-4bd0-bc93-aa203491e352)
+## Screenshots!
+![Screenshot index.php](https://github.com/user-attachments/assets/70d1eea1-07d4-4978-8e19-9c21a988c97e)
+![Screenshot object_edit.php](https://github.com/user-attachments/assets/e8618bbf-fd4a-4133-99e3-7d66701f95f7)
 
