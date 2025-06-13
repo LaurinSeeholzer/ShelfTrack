@@ -90,7 +90,7 @@
     <?php endif; ?>
 
     <div class="min-h-full">
-    <div class="bg-gray-900 pb-32">
+    <div class="bg-gray-900 pb-32 pt-12">
         <nav class="bg-gray-900">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="border-b border-gray-700">
